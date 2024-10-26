@@ -1,11 +1,11 @@
 N = int(input())
-board = [list(map(int,input().split())) for _ in range(N)]
+board = []
 dp = [[0]*N for _ in range(N)]
 dp[0][0] = 1
 
-# for _ in range(N):
-#     a = list(map(int, input().split()))
-#     board.append(a)
+for _ in range(N):
+    a = list(map(int, input().split()))
+    board.append(a)
 
 
 for i in range(N):
