@@ -1,17 +1,27 @@
 import sys
-input = lambda: sys.stdin.readline().rstrip()
 
-N = int(input())
-t, p = [0] * (N + 1), [0] * (N + 1)
-for i in range(1, N+1):
-    t[i], p[i] = map(int, input().split())
-    
-dp = [0] * (N + 1) 
+def main():
+    import sys
+    input = sys.stdin.readline
 
-for i in range(1, N+1):
-    dp[i] = max(dp[i], dp[i-1])
-    finish_date = i + t[i] -1
-    if finish_date <= N:
-        dp[finish_date] = max(dp[finish_date], dp[i-1] + p[i])
-        
-print(max(dp))
+    N = int(input())
+    T = [0] * N
+    P = [0] * N
+    dp = [0] * (N + 2)
+
+    for i in range(N):
+        t, p = map(int, input().split())
+        T[i] = t
+        P[i] = p
+
+    for i in range(N - 1, -1, -1):
+        time = i + T[i]
+        if time <= N:
+            dp[i] = max(P[i] + dp[time], dp[i + 1])
+        else:
+            dp[i] = dp[i + 1]
+
+    print(dp[0])
+
+if __name__ == "__main__":
+    main()
